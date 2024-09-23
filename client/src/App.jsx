@@ -98,6 +98,7 @@ function App() {
         <Route path="/SupplierConfirmOrder/:supplierId/:orderId/:supplierName" element={<SupplierConfirmOrder />} />
         <Route path="/acceptedorders" element={<AcceptedOrders />} />
         <Route path="/cartdetailsform" element={<checkout_btn />} />
+        <Route path="/cartdetailsform" element={<checkout_btn />} />
       </Routes>
     </BrowserRouter>
   );
