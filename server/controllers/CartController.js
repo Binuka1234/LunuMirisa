@@ -25,16 +25,24 @@ router.post("/Addtocarts", async (req, res) => {
     }
 });
 
-// Show cart items
+// Show cart items and calculate total price
 router.get("/ShowCart/:userId", async (req, res) => {
     const userId = req.params.userId;
-    console.log(userId)
+    console.log(userId);
 
     try {
         // Find cart items where the userId matches the provided userId
         const cartItems = await Cart.find({ userId });
 
-        res.json(cartItems);
+        // Calculate the total price of all cart items
+        const totalPrice = cartItems.reduce((total, item) => total + parseFloat(item.price),0);
+
+        // Send back cart items along with the total price
+        res.json({
+            cartItems,
+            totalPrice
+        });
+
     } catch (err) {
         console.error('Error finding cart items:', err);
         res.status(500).json({ message: "An error occurred while fetching cart items." });
